@@ -53,7 +53,7 @@ class ObsoleteCandlestickChartView: UIView {
     func calculateCandlestickWidth() -> CGFloat {
         let totalSpacing = CGFloat(candlestickArray.count - 1) * CandlestickChartView.HorizontalSpacing
         let proposedCandlestickWidth = (self.bounds.size.width - totalSpacing) / CGFloat(candlestickArray.count)
-        return min(CandlestickChartView.MaxCandlestickWidth, proposedCandlestickWidth)
+        return min(CandlestickChartView.DefaultCandlestickWidth, proposedCandlestickWidth)
     }
     
     func convertToAnotherCoordinateSystem(value: CGFloat, translation: CGFloat, scale: CGFloat) -> CGFloat {
