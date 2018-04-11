@@ -1,8 +1,8 @@
 //
-//  CandlestickChartView.swift
+//  TestView.swift
 //  CandlestickChart
 //
-//  Created by Fyodor Volchyok on 4/10/18.
+//  Created by Fyodor Volchyok on 4/11/18.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class CandlestickChartView: UIView {
     static let MaxCandlestickWidth: CGFloat = 30
     static let CandlestickCenterLineWidth: CGFloat = 3
     
-    var candlestickArray: [Candlestick] = [] {
+    var candlestickArray = [Candlestick]() {
         didSet {
             setNeedsDisplay()
         }
@@ -27,32 +27,22 @@ class CandlestickChartView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        guard !candlestickArray.isEmpty else { return }
-        print(candlestickArray)
+        let context = UIGraphicsGetCurrentContext()!
+        context.applyTransformToSwitchToBottomLeftCoordinateSystem(in: self)
+        transformContextToZoom(context)
         
         let candlestickWidth = calculateCandlestickWidth()
         
-        let (highestCandlestickPrice, lowestCandlestickPrice) = candlestickArray.priceBounds()
-        
-        let priceRange = CGFloat(highestCandlestickPrice - lowestCandlestickPrice)
-        let viewHeight = self.bounds.size.height
-        let scaleFactor = viewHeight / priceRange
-        
-        let translateFactor = CGFloat(-lowestCandlestickPrice)
-        
         for (index, candlestick) in candlestickArray.enumerated() {
-            let scaledRelativeDistanceToBottom = convertToAnotherCoordinateSystem(value: CGFloat(candlestick.lowPrice), translation: translateFactor, scale: scaleFactor)
-            let scaledRelativeDistanceToTop = convertToAnotherCoordinateSystem(value: CGFloat(candlestick.highPrice), translation: translateFactor, scale: scaleFactor)
-            
-            let candlestickX = CGFloat(index) * candlestickWidth + CGFloat(index) * CandlestickChartView.HorizontalSpacing
-            let candlestickYInCocoaTouchCoordinateSystem = viewHeight - scaledRelativeDistanceToTop
-            
-            let scaledCandlestickFrame = CGRect(x: candlestickX, y: candlestickYInCocoaTouchCoordinateSystem, width: candlestickWidth, height: scaledRelativeDistanceToTop - scaledRelativeDistanceToBottom)
-            
-            guard scaledCandlestickFrame.intersects(rect) else { continue }
-            
-            draw(candlestick: candlestick, in: scaledCandlestickFrame, translate: translateFactor, scale: scaleFactor)
+            draw(candlestick, x: candlestickX(index: index, width: candlestickWidth), width: candlestickWidth)
         }
+    }
+    
+    func transformContextToZoom(_ context: CGContext) {
+        let priceRange = candlestickArray.priceRange()
+        let aspectRatio = self.bounds.height / CGFloat(priceRange)
+        context.translateBy(x: 0, y: -CGFloat(candlestickArray.lowestPrice()) * aspectRatio)
+        context.scaleBy(x: 1, y: aspectRatio)
     }
     
     func calculateCandlestickWidth() -> CGFloat {
@@ -61,11 +51,11 @@ class CandlestickChartView: UIView {
         return min(CandlestickChartView.MaxCandlestickWidth, proposedCandlestickWidth)
     }
     
-    func convertToAnotherCoordinateSystem(value: CGFloat, translation: CGFloat, scale: CGFloat) -> CGFloat {
-        return (value + translation) * scale
+    func candlestickX(index: Int, width: CGFloat) -> CGFloat {
+        return CGFloat(index) * width + CGFloat(index) * CandlestickChartView.HorizontalSpacing
     }
     
-    func draw(candlestick: Candlestick, in rect: CGRect, translate: CGFloat, scale: CGFloat) {
+    func draw(_ candlestick: Candlestick, x: CGFloat, width: CGFloat) {
         let context = UIGraphicsGetCurrentContext()!
         
         let color: CGColor!
@@ -80,36 +70,26 @@ class CandlestickChartView: UIView {
         
         context.setFillColor(color)
         
+        let rect = CGRect(x: x, y: CGFloat(candlestick.lowPrice), width: width, height: CGFloat(candlestick.highPrice - candlestick.lowPrice))
+        
         let centerLine = rect.insetBy(dx: (rect.width - CandlestickChartView.CandlestickCenterLineWidth) / 2, dy: 0)
         context.fill(centerLine)
         
         let lowOpenClosePrice = CGFloat(min(candlestick.openPrice, candlestick.closePrice))
         let highOpenClosePrice = CGFloat(max(candlestick.openPrice, candlestick.closePrice))
         
-        let bodyScaledBottom = convertToAnotherCoordinateSystem(value: lowOpenClosePrice, translation: translate, scale: scale)
-        let bodyScaledTop = convertToAnotherCoordinateSystem(value: highOpenClosePrice, translation: translate, scale: scale)
-        let bodyScaledHeight = bodyScaledTop - bodyScaledBottom
-        
-        let bodyYInCocoaTouchCoordinateSystem = self.bounds.size.height - bodyScaledTop
-        let bodyRect = CGRect(x: rect.origin.x, y: bodyYInCocoaTouchCoordinateSystem, width: rect.width, height: bodyScaledHeight)
+        let bodyRect = CGRect(x: rect.origin.x, y: lowOpenClosePrice, width: rect.width, height: highOpenClosePrice - lowOpenClosePrice)
         context.fill(bodyRect)
     }
-    
+
 }
 
 
-extension Array where Element == Candlestick {
+extension CGContext {
     
-    func priceBounds() -> (Float, Float) {
-        // alternatively:
-        // candlestickArray.map({ $0.highPrice }).max()
-        let highestCandlestickPrice = reduce(self[0].highPrice) { (currentHighestPrice, candlestick) -> Float in
-            return Swift.max(currentHighestPrice, candlestick.highPrice)
-        }
-        let lowestCandlestickPrice = reduce(self[0].lowPrice) { (currentLowestPrice, candlestick) -> Float in
-            return Swift.min(currentLowestPrice, candlestick.lowPrice)
-        }
-        return (highestCandlestickPrice, lowestCandlestickPrice)
+    func applyTransformToSwitchToBottomLeftCoordinateSystem(in view: UIView) {
+        translateBy(x: 0, y: view.bounds.height)
+        scaleBy(x: 1, y: -1)
     }
     
 }

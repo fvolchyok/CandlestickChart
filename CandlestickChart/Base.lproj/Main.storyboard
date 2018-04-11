@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mv8-6T-sao">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cp1-R6-HBo" customClass="CandlestickChartView" customModule="CandlestickChart" customModuleProvider="target">
-                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cp1-R6-HBo" customClass="ObsoleteCandlestickChartView" customModule="CandlestickChart" customModuleProvider="target">
+                                <rect key="frame" x="8" y="28" width="359" height="619"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sit-gD-Sg7">
@@ -33,9 +34,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Cp1-R6-HBo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="7Tc-M0-q8B"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sit-gD-Sg7" secondAttribute="trailing" constant="16" id="HsQ-FU-uJb"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Cp1-R6-HBo" secondAttribute="bottom" constant="8" id="Qvs-l7-cJc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Cp1-R6-HBo" secondAttribute="bottom" constant="20" id="Qvs-l7-cJc"/>
                             <constraint firstItem="Cp1-R6-HBo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Qy2-6y-TWW"/>
+                            <constraint firstItem="sit-gD-Sg7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Wue-Zt-8sU"/>
                             <constraint firstItem="sit-gD-Sg7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="aiH-oU-byL"/>
                             <constraint firstItem="Cp1-R6-HBo" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-8" id="qeg-K8-yge"/>
                         </constraints>
@@ -48,6 +49,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="133.5832083958021"/>
+        </scene>
+        <!--Translated Coordinate System Test View Controller-->
+        <scene sceneID="FkS-2Z-rkd">
+            <objects>
+                <viewController id="mv8-6T-sao" customClass="TranslatedCoordinateSystemTestViewController" customModule="CandlestickChart" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Ol-h7-bAY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeh-HN-XoW" customClass="CandlestickChartView" customModule="CandlestickChart" customModuleProvider="target">
+                                <rect key="frame" x="8" y="20" width="359" height="627"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpa-Zi-Sp8">
+                                        <rect key="frame" x="279" y="8" width="72" height="30"/>
+                                        <state key="normal" title="randomize"/>
+                                        <connections>
+                                            <action selector="randomize" destination="mv8-6T-sao" eventType="touchUpInside" id="78i-y3-F2l"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstItem="lpa-Zi-Sp8" firstAttribute="trailing" secondItem="jeh-HN-XoW" secondAttribute="trailingMargin" id="daD-5W-5pn"/>
+                                    <constraint firstItem="lpa-Zi-Sp8" firstAttribute="top" secondItem="jeh-HN-XoW" secondAttribute="top" constant="8" id="v8q-Vu-tXY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WHw-Em-Vzy" firstAttribute="trailing" secondItem="jeh-HN-XoW" secondAttribute="trailing" constant="8" id="2fx-SS-t39"/>
+                            <constraint firstItem="jeh-HN-XoW" firstAttribute="top" secondItem="WHw-Em-Vzy" secondAttribute="top" id="XEs-3D-Btp"/>
+                            <constraint firstItem="WHw-Em-Vzy" firstAttribute="bottom" secondItem="jeh-HN-XoW" secondAttribute="bottom" constant="20" id="YAz-7I-lQX"/>
+                            <constraint firstItem="jeh-HN-XoW" firstAttribute="leading" secondItem="WHw-Em-Vzy" secondAttribute="leading" constant="8" id="YzZ-au-zOR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WHw-Em-Vzy"/>
+                    </view>
+                    <connections>
+                        <outlet property="candlestickView" destination="jeh-HN-XoW" id="fCg-Ks-hDx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Db-Wi-4Dg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="134"/>
         </scene>
     </scenes>
 </document>

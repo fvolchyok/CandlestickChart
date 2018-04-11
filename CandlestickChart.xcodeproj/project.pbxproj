@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		E792EB60207D17FC0030CC74 /* RandomCandlestickGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E792EB5F207D17FC0030CC74 /* RandomCandlestickGenerator.swift */; };
+		E792EB62207DFE1C0030CC74 /* CandlestickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E792EB61207DFE1C0030CC74 /* CandlestickChartView.swift */; };
+		E792EB64207E04650030CC74 /* TranslatedCoordinateSystemTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E792EB63207E04650030CC74 /* TranslatedCoordinateSystemTestViewController.swift */; };
 		E7D837A5207D07B800257988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D837A4207D07B800257988 /* AppDelegate.swift */; };
 		E7D837A7207D07B800257988 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D837A6207D07B800257988 /* ViewController.swift */; };
 		E7D837AA207D07B800257988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D837A8207D07B800257988 /* Main.storyboard */; };
 		E7D837AC207D07B800257988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7D837AB207D07B800257988 /* Assets.xcassets */; };
 		E7D837AF207D07B800257988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D837AD207D07B800257988 /* LaunchScreen.storyboard */; };
-		E7D837B7207D07CC00257988 /* CandlestickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D837B6207D07CC00257988 /* CandlestickChartView.swift */; };
+		E7D837B7207D07CC00257988 /* ObsoleteCandlestickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D837B6207D07CC00257988 /* ObsoleteCandlestickChartView.swift */; };
 		E7D837B9207D08C100257988 /* Candlestick.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D837B8207D08C100257988 /* Candlestick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E792EB5F207D17FC0030CC74 /* RandomCandlestickGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCandlestickGenerator.swift; sourceTree = "<group>"; };
+		E792EB61207DFE1C0030CC74 /* CandlestickChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandlestickChartView.swift; sourceTree = "<group>"; };
+		E792EB63207E04650030CC74 /* TranslatedCoordinateSystemTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCoordinateSystemTestViewController.swift; sourceTree = "<group>"; };
 		E7D837A1207D07B800257988 /* CandlestickChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CandlestickChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D837A4207D07B800257988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7D837A6207D07B800257988 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,7 +30,7 @@
 		E7D837AB207D07B800257988 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7D837AE207D07B800257988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7D837B0207D07B800257988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E7D837B6207D07CC00257988 /* CandlestickChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandlestickChartView.swift; sourceTree = "<group>"; };
+		E7D837B6207D07CC00257988 /* ObsoleteCandlestickChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsoleteCandlestickChartView.swift; sourceTree = "<group>"; };
 		E7D837B8207D08C100257988 /* Candlestick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candlestick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,9 +70,11 @@
 				E7D837AB207D07B800257988 /* Assets.xcassets */,
 				E7D837AD207D07B800257988 /* LaunchScreen.storyboard */,
 				E7D837B0207D07B800257988 /* Info.plist */,
-				E7D837B6207D07CC00257988 /* CandlestickChartView.swift */,
+				E7D837B6207D07CC00257988 /* ObsoleteCandlestickChartView.swift */,
 				E7D837B8207D08C100257988 /* Candlestick.swift */,
 				E792EB5F207D17FC0030CC74 /* RandomCandlestickGenerator.swift */,
+				E792EB61207DFE1C0030CC74 /* CandlestickChartView.swift */,
+				E792EB63207E04650030CC74 /* TranslatedCoordinateSystemTestViewController.swift */,
 			);
 			path = CandlestickChart;
 			sourceTree = "<group>";
@@ -144,10 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E792EB62207DFE1C0030CC74 /* CandlestickChartView.swift in Sources */,
 				E792EB60207D17FC0030CC74 /* RandomCandlestickGenerator.swift in Sources */,
 				E7D837A7207D07B800257988 /* ViewController.swift in Sources */,
+				E792EB64207E04650030CC74 /* TranslatedCoordinateSystemTestViewController.swift in Sources */,
 				E7D837B9207D08C100257988 /* Candlestick.swift in Sources */,
-				E7D837B7207D07CC00257988 /* CandlestickChartView.swift in Sources */,
+				E7D837B7207D07CC00257988 /* ObsoleteCandlestickChartView.swift in Sources */,
 				E7D837A5207D07B800257988 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

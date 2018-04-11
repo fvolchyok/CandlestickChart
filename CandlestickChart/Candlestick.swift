@@ -34,3 +34,31 @@ extension Candlestick {
     }
     
 }
+
+
+extension Array where Element == Candlestick {
+    
+    func lowestPrice() -> Float {
+        return reduce(self[0].lowPrice) { (currentLowestPrice, candlestick) -> Float in
+            return Swift.min(currentLowestPrice, candlestick.lowPrice)
+        }
+    }
+    
+    func highestPrice() -> Float {
+        // alternatively:
+        // candlestickArray.map({ $0.highPrice }).max()
+        return reduce(self[0].highPrice) { (currentHighestPrice, candlestick) -> Float in
+            return Swift.max(currentHighestPrice, candlestick.highPrice)
+        }
+    }
+    
+    func priceBounds() -> (Float, Float) {
+        return (lowestPrice(), highestPrice())
+    }
+    
+    func priceRange() -> Float {
+        let (lowestCandlestickPrice, highestCandlestickPrice) = priceBounds()
+        return highestCandlestickPrice - lowestCandlestickPrice
+    }
+    
+}
