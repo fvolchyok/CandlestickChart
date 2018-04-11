@@ -62,11 +62,8 @@ class CandlestickChartView: UIView {
     @objc func pan(_ gestureRecognizer: UIPanGestureRecognizer) {
         let grTranslation = gestureRecognizer.translation(in: self)
         translation = CGPoint(x: translationBase.x + grTranslation.x, y: translationBase.y + grTranslation.y)
-        switch gestureRecognizer.state {
-        case .ended:
+        if case .ended = gestureRecognizer.state {
             translationBase = translation
-        default:
-            break
         }
         setNeedsDisplay()
     }
@@ -87,7 +84,7 @@ class CandlestickChartView: UIView {
         transformContextToZoom(context)
         
         context.translateBy(x: translation.x, y: 0)
-        let candlestickWidth = calculateCandlestickWidth()
+        let candlestickWidth = calculateCandlestickWidthConsideringOverflow()
         
         for (index, candlestick) in candlestickArray.enumerated() {
             draw(candlestick, x: candlestickX(index: index, width: candlestickWidth), width: candlestickWidth)
@@ -101,7 +98,7 @@ class CandlestickChartView: UIView {
         context.scaleBy(x: 1, y: aspectRatio)
     }
     
-    private func calculateCandlestickWidth() -> CGFloat {
+    private func calculateCandlestickWidthConsideringOverflow() -> CGFloat {
         let totalSpacing = CGFloat(candlestickArray.count - 1) * CandlestickChartView.HorizontalSpacing
         let proposedCandlestickWidth = (self.bounds.size.width - totalSpacing) / CGFloat(candlestickArray.count)
         let overflow = proposedCandlestickWidth < CandlestickChartView.DefaultCandlestickWidth
@@ -127,17 +124,7 @@ class CandlestickChartView: UIView {
     private func draw(_ candlestick: Candlestick, x: CGFloat, width: CGFloat) {
         let context = UIGraphicsGetCurrentContext()!
         
-        let color: CGColor!
-        switch candlestick.trend {
-        case nil:
-            color = UIColor.black.cgColor
-        case CandlestickTrend.bullish?:
-            color = UIColor.blue.cgColor
-        case CandlestickTrend.bearish?:
-            color = UIColor.orange.cgColor
-        }
-        
-        context.setFillColor(color)
+        context.setFillColor(candlestick.trend.color().cgColor)
         
         let rect = CGRect(x: x, y: CGFloat(candlestick.lowPrice), width: width, height: CGFloat(candlestick.highPrice - candlestick.lowPrice))
         
@@ -151,6 +138,22 @@ class CandlestickChartView: UIView {
         context.fill(bodyRect)
     }
 
+}
+
+
+extension Optional where Wrapped == CandlestickTrend {
+    
+    func color() -> UIColor {
+        switch self {
+        case nil:
+            return UIColor.black
+        case CandlestickTrend.bullish?:
+            return UIColor.blue
+        case CandlestickTrend.bearish?:
+            return UIColor.orange
+        }
+    }
+    
 }
 
 
