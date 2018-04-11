@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  TranslatedCoordinateSystemTestViewController.swift
 //  CandlestickChart
 //
-//  Created by Fyodor Volchyok on 4/10/18.
+//  Created by Fyodor Volchyok on 4/11/18.
 //
 
 import UIKit
@@ -10,17 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var candlestickChartView: CandlestickChartView!
+    @IBOutlet weak var candlestickView: CandlestickChartView!
     
     let candlestickGenerator = RandomCandlestickGenerator()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         randomize()
     }
     
     @IBAction func randomize() {
-        candlestickChartView.candlestickArray = candlestickGenerator.randomCandlesticks(withNumber: 12)
+        candlestickView.candlestickArray = candlestickGenerator.randomCandlesticks(withNumber: 12)
     }
     
 }
